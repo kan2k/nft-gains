@@ -7,6 +7,11 @@ function NftList({ list }) {
   {
     console.log(list)
     return (
+      <div>
+      <nav class="navbar navbar-dark bg-dark">
+          {/* Add the navbar content here */}
+          NFT 
+      </nav>
       <div className="nft-items">
         {/* display books from the API */}
         {list && (
@@ -24,6 +29,7 @@ function NftList({ list }) {
             ))}
           </div>
         )}
+      </div>
       </div>
     )
   }
