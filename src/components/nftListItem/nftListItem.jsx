@@ -31,21 +31,21 @@ function NftList({ list }) {
 function NftListItem({ name, icon, openseaLink }) {
   return (
     <>
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={icon} height="200px" />
-        <Card.Body>
-          <Card.Title>{name}</Card.Title>
-          <Card.Text>
-            You bought at: {0} ETH / {0} USD
+      <Card >
+          <Card.Img variant="top" src={icon} height="200px" />
+          <Card.Body >
+            <Card.Title >{name}</Card.Title>
+            <Card.Text >
+              You bought at: {0} ETH / {0} USD
             <br />
             Current Floor Price: {0} ETH / {0} USD
             <br />
             Profit/Loss: {0} ETH / {0} USD
           </Card.Text>
-          <Button variant="primary" href={openseaLink}>
-            View on OpenSea
+            <Button variant="primary" href={openseaLink} >
+              View on OpenSea
           </Button>
-        </Card.Body>
+          </Card.Body>
       </Card>
     </>
   )
