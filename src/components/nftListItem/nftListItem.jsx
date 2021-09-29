@@ -1,6 +1,6 @@
 import React from 'react'
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
+import { Button, Navbar } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './nftListItem.css'
 
 function NftList({ list }) {
@@ -19,6 +19,7 @@ function NftList({ list }) {
                   icon={nft.image_url}
                   openseaLink={nft.permalink}
                 />
+                <hr />
               </div>
             ))}
           </div>
@@ -30,24 +31,26 @@ function NftList({ list }) {
 
 function NftListItem({ name, icon, openseaLink }) {
   return (
-    <>
-      <Card >
-          <Card.Img variant="top" src={icon} height="200px" />
-          <Card.Body >
-            <Card.Title >{name}</Card.Title>
-            <Card.Text >
-              You bought at: {0} ETH / {0} USD
+    <div className="container">
+      <div className="row" >
+        <div className="col" >
+          <img variant="top" src={icon} height="200px" />
+        </div>
+        <div className="col" >{name}</div>
+        <div className="col" >
+          You bought at: {0} ETH / {0} USD
             <br />
             Current Floor Price: {0} ETH / {0} USD
             <br />
             Profit/Loss: {0} ETH / {0} USD
-          </Card.Text>
-            <Button variant="primary" href={openseaLink} >
-              View on OpenSea
+        </div>
+        <div className="col">
+          <Button variant="primary" href={openseaLink} >
+            View on OpenSea
           </Button>
-          </Card.Body>
-      </Card>
-    </>
+        </div>
+      </div>
+    </div>
   )
 }
 

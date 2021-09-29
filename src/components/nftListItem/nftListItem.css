@@ -1,9 +1,7 @@
-.card {
-  padding: 20px;
-  border: 1px solid;
-  margin: 20px;
-}
-
 .nft-items {
   width: 100%;
+}
+
+.container{
+  padding: 20px;
 }
