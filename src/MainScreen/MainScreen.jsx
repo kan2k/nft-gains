@@ -1,11 +1,9 @@
-import './App.css'
+import './MainScreen.css'
 import { useEffect, useState } from 'react'
 import { NftList } from './components/NftListItem/NftListItem'
 import { ethers } from 'ethers'
-import Web3 from 'web3'
-import Web3Modal from 'web3modal'
 
-function App() {
+function MainScreen() {
   const [userAddress, setUserAddress] = useState([])
   const [nftItems, setNftItems] = useState([])
 
@@ -21,12 +19,15 @@ function App() {
   }
 
   useEffect(() => {
-    fetchData('0xBDa5baFAA1776d0c8ea849b35B1E50Bf988E3B03')
+    // if (userAddress != undefined) {
+    //   fetchData(userAddress)
+    // }
   }, [])
 
   return (
     <div className="App">
       <header className="App-header">
+        <button> connect </button>
         <div className="nft-items">
           <NftList list={nftItems} />
         </div>
