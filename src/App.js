@@ -1,49 +1,49 @@
 import './App.css'
-import { useEffect, useState } from 'react'
-import { NftList } from './components/nftListItem/nftListItem'
+
 import Navbar from './components/NavBar/NavBar'
-import { ethers } from 'ethers'
-import Web3 from 'web3'
-import Web3Modal from 'web3modal'
-import { Switch, Route } from "react-router-dom";
-import Connect from "./ConnectScreen/Connect";
-import MainScreen from "./MainScreen/MainScreen";
+import { Switch, Route } from 'react-router-dom'
+import ConnectScreen from './ConnectScreen/ConnectScreen'
+import MainScreen from './MainScreen/MainScreen'
+import { useWallet, UseWalletProvider } from 'use-wallet'
+import { UpdateEthPrice } from './redux/action'
+import { store } from './redux/store'
 
 function App() {
-  const [userAddress, setUserAddress] = useState([])
-  const [nftItems, setNftItems] = useState([])
+  const wallet = useWallet()
+  const blockNumber = wallet.getBlockNumber()
 
-  async function fetchData(address) {
-    console.log('Fetching: ', address)
-    const response = await fetch(`http://localhost:3001/opensea/${address}`)
-      .then((response) => response.json())
-      .then((response) => {
-        setNftItems(response.assets)
-        console.log('fetchData Response: ', response)
-      })
-      .catch((err) => console.error(err))
-  }
-
-  useEffect(() => {
-    fetchData('0xBDa5baFAA1776d0c8ea849b35B1E50Bf988E3B03')
-  }, [])
-
+  // todo: fetch from api
+  store.dispatch(UpdateEthPrice(300))
   return (
-    <div className="App">
+    <>
       <Navbar />
-      <Switch>
-        <Route path = "/connect" exact>
-          <Connect />
-        </Route>
-        <Route path = "/" exact>
-          <h1>This is nft items</h1>
-          <div className="nft-items">
-            <NftList list={nftItems} />
-          </div>
-        </Route>
-    </Switch>
-    </div>
+      <h1> announcement bar </h1>
+      {wallet.status === 'connected' ? (
+        <div>
+          <Switch>
+            <Route path="/connect" exact>
+              <ConnectScreen />
+            </Route>
+            <Route path="/" exact>
+              <MainScreen />
+            </Route>
+          </Switch>
+        </div>
+      ) : (
+        <ConnectScreen />
+      )}
+    </>
   )
 }
 
-export default App
+export default () => (
+  <UseWalletProvider
+    chainId={1}
+    connectors={{
+      // This is how connectors get configured
+      portis: { dAppId: 'my-dapp-id-123-xyz' },
+    }}
+  >
+    <App />
+  </UseWalletProvider>
+)

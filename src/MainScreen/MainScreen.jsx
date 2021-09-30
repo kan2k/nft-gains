@@ -1,9 +1,10 @@
 import './MainScreen.css'
 import { useEffect, useState } from 'react'
-import { NftList } from '../components/nftListItem/nftListItem'
-import { ethers } from 'ethers'
+import { NftList } from '../components/NftListItem/NftListItem'
+import { useWallet } from 'use-wallet'
 
 function MainScreen() {
+  const wallet = useWallet()
   const [userAddress, setUserAddress] = useState([])
   const [nftItems, setNftItems] = useState([])
 
@@ -19,18 +20,12 @@ function MainScreen() {
   }
 
   useEffect(() => {
-    // if (userAddress != undefined) {
-    //   fetchData(userAddress)
-    // }
+    fetchData(wallet.account)
   }, [])
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="nft-items">
-          <NftList list={nftItems} />
-        </div>
-      </header>
+    <div className="nft-items">
+      <NftList list={nftItems} />
     </div>
   )
 }
