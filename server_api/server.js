@@ -17,38 +17,36 @@ app.listen(port, () => {
 
 app.get('/opensea')
 
-app.get('/opensea/:address/', async (req, res) => {
-  return_datas = { nft_name: '', buy_price: '', nft_floorprice: '' }
-  var dateObj = new Date()
-  var month = dateObj.getUTCMonth() + 1 //months from 1-12
-  var day = dateObj.getUTCDate()
-  var year = dateObj.getUTCFullYear()
-  var hour = dateObj.getUTCHours()
-  var min = dateObj.getUTCMinutes()
-  var sec = dateObj.getUTCSeconds()
-  newdate =
-    '[UTC ' +
-    year +
-    '/' +
-    month +
-    '/' +
-    day +
-    '|' +
-    hour +
-    ':' +
-    min +
-    ':' +
-    sec +
-    ']'
-  console.log(newdate, 'Address is requesting:', req.params.address)
+app.get('/opensea_get_assets/:wallet_address', async (req, res) => {
+  console.log(new Date(), 'Address is requesting:', req.params.wallet_address)
   const response = await fetch(
-    `https://api.opensea.io/api/v1/assets?owner=${req.params.address}&order_direction=desc&offset=0&limit=50`,
+    `https://api.opensea.io/api/v1/assets?owner=${req.params.wallet_address}&order_direction=desc&offset=0&limit=50`,
     options,
   )
     .then((response) => response.json())
     .then((response) => {
       res.json(response)
-      console.log(response)
     })
     .catch((err) => console.error(err))
 })
+
+app.get(
+  '/opensea_get_single_asset/:contract_address/:token_id',
+  async (req, res) => {
+    console.log(
+      new Date(),
+      'Requesting this contract:',
+      req.params.contract_address,
+      req.params.token_id,
+    )
+    const response = await fetch(
+      `https://api.opensea.io/api/v1/asset/${req.params.contract_address}/${req.params.token_id}/`,
+      options,
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        res.json(response)
+      })
+      .catch((err) => console.error(err))
+  },
+)

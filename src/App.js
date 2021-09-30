@@ -12,8 +12,8 @@ function App() {
   const wallet = useWallet()
   const blockNumber = wallet.getBlockNumber()
 
-  // todo: fetch from api
-  store.dispatch(UpdateEthPrice(300))
+  // TODO: fetch from api
+  store.dispatch(UpdateEthPrice(3000))
   return (
     <>
       <Navbar />
