@@ -1,9 +1,13 @@
 import './App.css'
 import { useEffect, useState } from 'react'
-import { NftList } from './components/NftListItem/NftListItem'
+import { NftList } from './components/nftListItem/nftListItem'
+import Navbar from './components/NavBar/NavBar'
 import { ethers } from 'ethers'
 import Web3 from 'web3'
 import Web3Modal from 'web3modal'
+import { Switch, Route } from "react-router-dom";
+import Connect from "./ConnectScreen/Connect";
+import MainScreen from "./MainScreen/MainScreen";
 
 function App() {
   const [userAddress, setUserAddress] = useState([])
@@ -26,11 +30,18 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <div className="nft-items">
-          <NftList list={nftItems} />
-        </div>
-      </header>
+      <Navbar />
+      <Switch>
+        <Route path = "/connect" exact>
+          <Connect />
+        </Route>
+        <Route path = "/" exact>
+          <h1>This is nft items</h1>
+          <div className="nft-items">
+            <NftList list={nftItems} />
+          </div>
+        </Route>
+    </Switch>
     </div>
   )
 }

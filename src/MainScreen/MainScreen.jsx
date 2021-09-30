@@ -1,6 +1,6 @@
 import './MainScreen.css'
 import { useEffect, useState } from 'react'
-import { NftList } from './components/NftListItem/NftListItem'
+import { NftList } from '../components/nftListItem/nftListItem'
 import { ethers } from 'ethers'
 
 function MainScreen() {
@@ -27,7 +27,6 @@ function MainScreen() {
   return (
     <div className="App">
       <header className="App-header">
-        <button> connect </button>
         <div className="nft-items">
           <NftList list={nftItems} />
         </div>
@@ -36,4 +35,4 @@ function MainScreen() {
   )
 }
 
-export default App
+export default MainScreen

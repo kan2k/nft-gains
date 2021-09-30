@@ -1,21 +1,12 @@
 import React from 'react'
-import { Button, Navbar } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './NftListItem.css'
+import './nftListItem.css'
 
 function NftList({ list }) {
   {
     return (
       <div>
-        <nav className="navbar navbar-dark bg-dark">
-          <button> Connect To Wallet </button>
-          <p>
-            Your Profile: {0} ETH / {0} USD
-          </p>
-          <p>
-            Current Price: {0} ETH / {0} USD
-          </p>
-        </nav>
         <div className="nft-items">
           {/* display books from the API */}
           {list && (
