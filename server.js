@@ -1,15 +1,19 @@
 const express = require('express')
 const cors = require('cors')
 const fetch = require('cross-fetch')
+const path = require('path')
 const app = express()
 const port = 3001
 const options = { method: 'GET' }
 
 app.use(cors())
 
-app.get('/api', (req, res) => {
-  res.json({ message: 'Hello World!' })
-})
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('build'))
+  app.get('*', (req, res) => {
+    req.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+  })
+}
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
