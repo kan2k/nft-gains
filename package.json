@@ -1,5 +1,8 @@
 {
   "name": "nft-gains",
+  "engines": {
+    "node": "12.18"
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
